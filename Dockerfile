@@ -1,5 +1,5 @@
 FROM  centos:8
-LABEL maintainer="tech-ally@lacework.net" \
+LABEL maintainer="rukender" \
       description="The Lacework CLI helps you manage the Lacework cloud security platform"
 
 RUN yum update -y
