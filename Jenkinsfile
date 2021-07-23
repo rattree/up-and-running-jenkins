@@ -7,7 +7,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("$DOCKER_HUB/lacework-cli")
+                    app = docker.build("$ECR_REGISTRY_URL/lacework-cli")
                     app.inside {
                         sh 'lacework --help'
                     }
@@ -20,7 +20,8 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
+                    #docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
+                    docker.withRegistry('https://408750594584.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:my.aws.credentials') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
@@ -31,15 +32,15 @@ pipeline {
             environment {
                 LW_API_SECRET = credentials('lacework_api_secret')
             }
-            agent {
-                docker { image 'lacework/lacework-cli:latest' }
-            }
+           # agent {
+            #    docker { image 'lacework/lacework-cli:latest' }
+           # }
             when {
                 branch 'master'
             }
             steps {
                 echo 'Running Lacework vulnerability scan'
-                sh "lacework vulnerability container scan index.docker.io $DOCKER_HUB/lacework-cli latest --poll --noninteractive --details"
+                sh "lacework vulnerability container scan index.docker.io $ECR_REGISTRY_URL/lacework-cli latest --poll --noninteractive --details"
             }
         }
     }
