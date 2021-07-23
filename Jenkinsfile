@@ -39,7 +39,7 @@ pipeline {
             }
             steps {
                 echo 'Running Lacework vulnerability scan'
-                sh "lacework vulnerability container scan $ECR_REGISTRY_URL/lacework-cli latest --poll --noninteractive --details"
+                sh "lacework vulnerability container scan dkr.ecr.us-west-2.amazonaws.com $ECR_REGISTRY_URL/lacework-cli latest --poll --noninteractive --details"
             }
         }
     }
