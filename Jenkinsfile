@@ -20,7 +20,6 @@ pipeline {
             }
             steps {
                 script {
-                    #docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
                     docker.withRegistry('https://408750594584.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:my.aws.credentials') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
