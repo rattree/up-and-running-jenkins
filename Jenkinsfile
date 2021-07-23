@@ -31,6 +31,9 @@ pipeline {
             environment {
                 LW_API_SECRET = credentials('lacework_api_secret')
             }
+            agent {
+                docker { image 'lacework/lacework-cli:latest' }
+            }
             when {
                 branch 'master'
             }
