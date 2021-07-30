@@ -56,5 +56,5 @@ pipeline {
 //                 sh "lacework vulnerability container scan 242313835346.dkr.ecr.us-west-2.amazonaws.com lacework-cli latest --poll --noninteractive --details"
 //             }
 //         }
-//     }
-// }
+     }
+}
