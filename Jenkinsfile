@@ -4,6 +4,11 @@ pipeline {
         LW_ACCESS_TOKEN = credentials('LW_ACCESS_TOKEN')
         LW_ACCOUNT_NAME = credentials('LW_ACCOUNT_NAME')
     }
+    parameters {
+        string (name: 'IMAGE_TAG',
+                description: "Specify Image Tag",
+                defaultValue: '')
+    }
     stages {
         stage('Build Docker Image') {
             when {
