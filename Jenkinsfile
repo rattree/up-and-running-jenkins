@@ -14,6 +14,15 @@ pipeline {
                 }
             }
         }
+        stage('Scan') {
+            steps {
+                echo 'Scanning image ...'
+                sh "curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner"
+                sh "chmod +x lw-scanner"
+                //sh "./lw-scanner evaluate 242313835346.dkr.ecr.us-west-2.amazonaws.com/${IMAGE_NAME} ${IMAGE_TAG} --build-id ${BUILD_ID}"
+                sh "./lw-scanner evaluate  app --build-id ${BUILD_ID}"
+            }
+        }
         stage('Push Docker Image') {
             when {
                 branch 'master'
