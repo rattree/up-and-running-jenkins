@@ -7,7 +7,7 @@ pipeline {
     parameters {
         string (name: 'IMAGE_TAG',
                 description: "Specify Image Tag",
-                defaultValue: '')
+                defaultValue: 'latest')
     }
     stages {
         stage('Build Docker Image') {
