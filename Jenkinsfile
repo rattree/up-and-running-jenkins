@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        LW_ACCESS_TOKEN = credentials('LW_ACCESS_TOKEN')
+        LW_ACCOUNT_NAME = credentials('LW_ACCOUNT_NAME')
+    }
     stages {
         stage('Build Docker Image') {
             when {
@@ -14,7 +18,8 @@ pipeline {
                 }
             }
         }
-        stage('Scan') {
+// added by me
+        stage('Inline-Scan') {
             steps {
                 echo 'Scanning image ...'
                 sh "curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner"
@@ -36,20 +41,20 @@ pipeline {
                 }
             }
         }
-        stage('Lacework Vulnerability Scan') {
-            environment {
-                LW_API_SECRET = credentials('lacework_api_secret')
-            }
-            agent {
-                docker { image 'lacework/lacework-cli:latest' }
-            }
-            when {
-                branch 'master'
-            }
-            steps {
-                echo 'Running Lacework vulnerability scan'
-                sh "lacework vulnerability container scan 242313835346.dkr.ecr.us-west-2.amazonaws.com lacework-cli latest --poll --noninteractive --details"
-            }
-        }
-    }
-}
+//         stage('Lacework Vulnerability Scan') {
+//             environment {
+//                 LW_API_SECRET = credentials('lacework_api_secret')
+//             }
+//             agent {
+//                 docker { image 'lacework/lacework-cli:latest' }
+//             }
+//             when {
+//                 branch 'master'
+//             }
+//             steps {
+//                 echo 'Running Lacework vulnerability scan'
+//                 sh "lacework vulnerability container scan 242313835346.dkr.ecr.us-west-2.amazonaws.com lacework-cli latest --poll --noninteractive --details"
+//             }
+//         }
+//     }
+// }
