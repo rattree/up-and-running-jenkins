@@ -1,5 +1,5 @@
 #FROM  centos:8
-FROM centos:7
+FROM centos:6
 LABEL maintainer="rukender" \
       description="The Lacework CLI helps you manage the Lacework cloud security platform"
 
