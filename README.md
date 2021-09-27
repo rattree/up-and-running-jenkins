@@ -1,4 +1,4 @@
-# Up and Running with Lacework and Jenkins
+# Lacework and Jenkins
 This repo contains a tutorial for how Lacework customers can integrate the Lacework container vulnerability capability with Jenkins to test container build for vulnerabilities.
 
 ## What we are going to build
