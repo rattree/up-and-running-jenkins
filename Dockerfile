@@ -1,6 +1,5 @@
 #FROM  centos:8
-#FROM centos:7
-FROM alpine:3.14
+FROM centos:7
 LABEL maintainer="rukender" \
       description="The Lacework CLI helps you manage the Lacework cloud security platform"
 
