@@ -29,8 +29,8 @@ pipeline {
                 echo 'Scanning image ...'
                 sh "curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner"
                 sh "chmod +x lw-scanner"
-                sh "export LW_SCANNER_SAVE_RESULTS=true"
-                sh "./lw-scanner evaluate $ECR_REGISTRY_URL/lacework-cli ${IMAGE_TAG} --build-id ${BUILD_ID} > report.html" 
+                //sh "export LW_SCANNER_SAVE_RESULTS=true"
+                sh "./lw-scanner evaluate $ECR_REGISTRY_URL/lacework-cli ${IMAGE_TAG} --build-id ${BUILD_ID} --save > report.html" 
                 //sh "./lw-scanner evaluate  ${app} --build-id ${BUILD_ID}"
             }
         }
